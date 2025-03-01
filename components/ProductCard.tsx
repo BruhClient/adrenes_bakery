@@ -1,7 +1,7 @@
 
 import Image from "next/image";
 import { FunctionComponent } from "react";
-import AddToCartButton from "./AddToCartButton";
+import AddToCartButton from "@/components/AddToCartButton";
 import ViewMoreButton from "./ViewMoreButton";
 
 interface ProductCardProps {
