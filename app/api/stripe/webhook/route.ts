@@ -9,7 +9,7 @@ export const runtime = "nodejs"; // Ensure this runs on Node.js, not Edge
 
 export async function POST(req : Request) { 
     const body = await req.text() ; 
-    const signature = (await headers()).get("Stripe-Signature") as string
+    const signature = (await headers()).get("stripe-signature") as string
 
     let event: Stripe.Event; 
     try { 
