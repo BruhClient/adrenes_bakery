@@ -26,7 +26,7 @@ export const { handlers : {GET,POST}, auth, signIn, signOut } = NextAuth({
       return { 
         id : user.id, 
         email : user.email, 
-        deiliveryAddress : user.deliveryAddress, 
+        deliveryAddress : user.deliveryAddress, 
         postalCode : user.postalCode , 
         phoneNumber : user.phoneNumber, 
         image : user.image , 
