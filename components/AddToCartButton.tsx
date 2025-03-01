@@ -3,8 +3,9 @@
 import { FunctionComponent } from "react";
 import { Button } from "./ui/button";
 import {  ShoppingCart } from "lucide-react";
-import {cn} from "../../adrenes-bakery/lib/utils"
+
 import { useShoppingCart } from "use-shopping-cart";
+import { cn } from "@/lib/utils";
 
 interface AddToCartButtonProps {
    
