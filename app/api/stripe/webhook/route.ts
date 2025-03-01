@@ -11,17 +11,22 @@ export const config = {
       bodyParser: false, // Required for raw body parsing
     },
   };
+  
 
-
-
-export async function POST(req : Request) { 
-    const body = await req.text() ; 
- 
+export async function POST(req : Request) :Promise<NextResponse> { 
+    
+    const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
     const signature = (await headers()).get("stripe-signature") as string
 
+    if (!signature || !endpointSecret) {
+        return NextResponse.json({ error: "Missing Stripe signature or secret" }, { status: 400 });
+    }
+    
     let event: Stripe.Event; 
     try { 
-        event = stripe.webhooks.constructEvent(body,signature,process.env.STRIPE_WEBHOOK_SECRET!)
+        const rawBody = await req.arrayBuffer();
+
+        event = stripe.webhooks.constructEvent(rawBody,signature,endpointSecret)
     } catch (error) { 
         console.log(error)
         return new NextResponse("invalid signature",{status : 400})
