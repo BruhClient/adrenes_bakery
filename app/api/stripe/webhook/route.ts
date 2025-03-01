@@ -4,21 +4,16 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-export const runtime = "nodejs"; // Ensure this runs on Node.js, not Edge
 
-export const config = {
-    api: {
-      bodyParser: false, // Required for raw body parsing
-    },
-  };
   
 
-export async function POST(req : Request) :Promise<NextResponse> { 
-    
+export async function POST(req : Request) { 
+
     const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
     const signature = (await headers()).get("stripe-signature") as string
 
     if (!signature || !endpointSecret) {
+        console.log("MISSING SIGNATURE")
         return NextResponse.json({ error: "Missing Stripe signature or secret" }, { status: 400 });
     }
     

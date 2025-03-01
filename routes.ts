@@ -2,9 +2,11 @@ export const ProtectedRoutes = [
  
     "/stripe",
     "/orders" , 
-    "/admin"
+    "/admin", 
 
 ]
+
+export const webhookRoute = "/api/stripe/webhook"
 
 export const adminRoutePrefix = "/admin"
 

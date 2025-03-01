@@ -1,7 +1,7 @@
 
 import NextAuth from "next-auth"
 import authconfig from "./lib/authconfig"
-import { DEFAULT_LOGIN_REDIRECT, ProtectedRoutes } from "./routes"
+import { DEFAULT_LOGIN_REDIRECT, ProtectedRoutes, webhookRoute } from "./routes"
 
 
 
@@ -17,7 +17,11 @@ export default auth((req) => {
     
 
 
-    let isProtectedRoute = false 
+    let isProtectedRoute = false
+    if (nextUrl.pathname.includes(webhookRoute))   { 
+        return 
+    }
+
     for (let i = 0 ; i < ProtectedRoutes.length ; i ++) { 
         if (nextUrl.pathname.includes(ProtectedRoutes[i])) { 
             isProtectedRoute = true 
