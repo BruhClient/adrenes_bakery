@@ -40,8 +40,8 @@ export async function createCheckout(cartDetails : any ,deliveryFee : number,req
           metadata : {
               userId : authSession.user.id ?? ""
           },
-          success_url: `${process.env.NEXT_PUBLIC_VERCEL_URL}/stripe/success`,
-          cancel_url: `${process.env.NEXT_PUBLIC_VERCEL_URL}/stripe/error`,
+          success_url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/stripe/success`,
+          cancel_url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/stripe/error`,
           
           
         });
