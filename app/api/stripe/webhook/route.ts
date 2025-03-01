@@ -6,14 +6,22 @@ import { prisma } from "@/lib/prisma";
 
 export const runtime = "nodejs"; // Ensure this runs on Node.js, not Edge
 
+export const config = {
+    api: {
+      bodyParser: false, // Required for raw body parsing
+    },
+  };
+
+
 
 export async function POST(req : Request) { 
     const body = await req.text() ; 
+ 
     const signature = (await headers()).get("stripe-signature") as string
 
     let event: Stripe.Event; 
     try { 
-        event = stripe.webhooks.constructEvent(body,signature,process.env.STRIPE_WEBHOOK_SECERT!)
+        event = stripe.webhooks.constructEvent(body,signature,process.env.STRIPE_WEBHOOK_SECRET!)
     } catch (error) { 
         console.log(error)
         return new NextResponse("invalid signature",{status : 400})
