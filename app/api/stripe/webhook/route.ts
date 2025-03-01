@@ -4,6 +4,9 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
+export const runtime = "nodejs"; // Ensure this runs on Node.js, not Edge
+
+
 export async function POST(req : Request) { 
     const body = await req.text() ; 
     const signature = (await headers()).get("Stripe-Signature") as string
@@ -12,6 +15,7 @@ export async function POST(req : Request) {
     try { 
         event = stripe.webhooks.constructEvent(body,signature,process.env.STRIPE_WEBHOOK_SECERT!)
     } catch (error) { 
+        console.log(error)
         return new NextResponse("invalid signature",{status : 400})
     }
 
