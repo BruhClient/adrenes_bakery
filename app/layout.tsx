@@ -1,15 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {  Glegoo, Poppins } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import Providers from "@/components/Providers";
+import ShoppingCartModal from "@/components/ShoppingCartModel";
+import { Toaster } from "@/components/ui/sonner";
+import UserButtons from "@/components/UserButtons";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
+  weight : ["400","600" ,"800"]
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const glegoo = Glegoo({
+  variable: "--font-glegoo",
   subsets: ["latin"],
+  weight : ["400"]
 });
 
 export const metadata: Metadata = {
@@ -24,11 +33,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <Providers>
+        <ShoppingCartModal />
+        <body
+          className={`${poppins.variable} ${glegoo.variable} antialiased font-poppins`}
+        >
+          <Navbar />
+          {children}
+          <Toaster />
+          <Footer />
+          <UserButtons />
+        </body>
+        
+      </Providers>
+      
     </html>
   );
 }
