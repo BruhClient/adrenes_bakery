@@ -24,7 +24,7 @@ export async function POST(req : Request) :Promise<NextResponse> {
     
     let event: Stripe.Event; 
     try { 
-        const rawBody = await req.arrayBuffer();
+        const rawBody = await req.text();
 
         event = stripe.webhooks.constructEvent(rawBody,signature,endpointSecret)
     } catch (error) { 
