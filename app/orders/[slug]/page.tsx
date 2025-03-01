@@ -8,6 +8,9 @@ const OrdersPage = async ({params} : {params : Promise<{slug :string}>}) => {
     const orders = await prisma.order.findMany({ 
         where : { 
             userId : slug 
+        }, 
+        orderBy : { 
+            createdAt : "desc"
         }
     })
 

@@ -22,7 +22,7 @@ const OrderCard: FunctionComponent<OrderCardProps> = ({order}) => {
         <CardTitle className="text-lg">Order #{order.id}</CardTitle>
         
         <CardDescription className="pb-2 flex flex-col">
-          <div>{format(new Date(order.createdAt), "MM/dd/yyyy',' h:mm a")}</div>
+          <div>{format(new Date(order.createdAt), "dd/MM/yyyy',' h:mm a")}</div>
           <div>
             {order.requiresDelivery ? <div>Delivery to {order.deliveryAddress} {order.postalCode}</div> : <div className="text-secondary">Self Collection at Westwood Ave Blk 232 #11-41</div>}
           </div>
